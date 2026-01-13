@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  workspace:
+    image: mcr.microsoft.com/devcontainers/base:ubuntu-24.04
+    command: sleep infinity
+    volumes:
+      - .:/workspaces/app:cached
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      - DATABASE_URL=sqlite:////data/app.db
+    volumes:
+      - ./backend:/app:cached
+      - db-data:/data
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/app:cached
+      - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0 --port 5173 --strictPort
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  db-data:
