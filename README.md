@@ -2,7 +2,7 @@
 
 ## In Codespaces
 - 创建/打开 Codespace 后，会自动启动：
-  - Frontend: 5173 (Preview)
+  - Frontend: 5174 (Preview)
   - Backend: 8000
 
 如果没有自动启动：

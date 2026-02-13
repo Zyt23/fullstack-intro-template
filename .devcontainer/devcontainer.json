@@ -4,25 +4,18 @@
   "service": "workspace",
   "workspaceFolder": "/workspaces/app",
 
-  "runServices": ["backend", "frontend"],
+  "runServices": ["backend"],
   "shutdownAction": "stopCompose",
 
-  "forwardPorts": ["backend:8000", "frontend:5173"],
+  "forwardPorts": [8001, 5174],
   "portsAttributes": {
-    "frontend:5173": {
-      "label": "React Preview",
-      "onAutoForward": "openPreview"
-    },
-    "backend:8000": {
-      "label": "FastAPI",
-      "onAutoForward": "silent"
-    }
+    "8001": { "label": "FastAPI", "onAutoForward": "silent" },
+    "5174": { "label": "React Preview", "onAutoForward": "openPreview" }
   },
 
   "features": {
     "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
-    "ghcr.io/devcontainers/features/node:1": { "version": "20" },
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" }
   },
 
   "customizations": {
@@ -30,11 +23,11 @@
       "extensions": [
         "Continue.continue",
         "ms-python.python",
-        "dbaeumer.vscode-eslint",
-        "ms-azuretools.vscode-docker"
+        "dbaeumer.vscode-eslint"
       ]
     }
   },
 
-  "postCreateCommand": "bash .devcontainer/postCreateCommand.sh"
+  "postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
+  "postStartCommand": "bash .devcontainer/postStartCommand.sh"
 }
